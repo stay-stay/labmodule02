@@ -1,0 +1,28 @@
+package system;
+
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
+public class SystemPerformanceManager {
+    private static final Logger _Logger = Logger.getLogger(SystemPerformanceManager.class.getName());
+    private int pollRate = ConfigConst.DEFAULT_POLL_CYCLES;
+
+    public SystemPerformanceManager() {
+        this.pollRate = ConfigUtil.getInstance().getInteger(
+            ConfigConst.GATEWAY_DEVICE, ConfigConst.POLL_CYCLES_KEY, ConfigConst.DEFAULT_POLL_CYCLES);
+
+        if (this.pollRate <= 0) {
+            this.pollRate = ConfigConst.DEFAULT_POLL_CYCLES;
+        }
+    }
+
+    public boolean startManager() {
+        _Logger.info("SystemPerformanceManager is starting...");
+        return true;
+    }
+
+    public boolean stopManager() {
+        _Logger.info("SystemPerformanceManager is stopped.");
+        return true;
+    }
+}
